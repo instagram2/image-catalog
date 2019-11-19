@@ -4,10 +4,13 @@ import com.kumuluz.ee.rest.beans.QueryParameters;
 import com.kumuluz.ee.rest.utils.JPAUtils;
 import instagram2.imagecatalog.lib.ImageMetadata;
 import instagram2.imagecatalog.models.entities.ImageMetadataEntity;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import javax.json.Json;
 import javax.ws.rs.InternalServerErrorException;
 import javax.ws.rs.NotFoundException;
 import javax.ws.rs.ProcessingException;
@@ -16,6 +19,7 @@ import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.UriInfo;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Arrays;
 import java.util.logging.Logger;
@@ -29,11 +33,22 @@ public class ImageMetadataBean {
 
     private Client httpClient;
 
-    private ImageMetadata testImg = new ImageMetadata(1);
+    private String imgProperties = "{" +
+            "\"imageId\":1," +
+            "\"description\":\"test\"" +
+            "\"title\":\"testTitle\"" +
+            "\"uri\":\"testUri\"" +
+            "\"width\":6" +
+            "\"height\":5" +
+            "}";
+
+    private JSONParser jsonParser = new JSONParser();
+
+    private ImageMetadata testImg;
 
     private String baseUrl;
 
-    private List<ImageMetadata> mockDB = Arrays.asList(this.testImg);
+    private List<ImageMetadata> mockDB = new ArrayList<>();
 
     @PostConstruct
     private void init() {
@@ -53,7 +68,7 @@ public class ImageMetadataBean {
         ImageMetadata imageMetadata = null;
 
         for (ImageMetadata image : this.mockDB) {
-            if (image.getImageId() == id){
+            if (image.getImageId().equals(id)){
                 imageMetadata = image;
             }
         }
@@ -68,9 +83,7 @@ public class ImageMetadataBean {
     }
 
     public ImageMetadata createImageMetadata(ImageMetadata imageMetadata) {
-        if (!this.mockDB.add(imageMetadata)) {
-            throw new RuntimeException("Entity was not persisted");
-        }
+        this.mockDB.add(imageMetadata);
         return imageMetadata;
     }
 

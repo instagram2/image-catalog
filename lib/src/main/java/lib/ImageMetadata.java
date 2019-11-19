@@ -13,10 +13,6 @@ public class ImageMetadata {
     private String uri;
     private Integer numberOfComments;
 
-    public ImageMetadata(Integer id){
-        this.imageId = id;
-    }
-
     public String getTitle() {
         return this.title;
     }

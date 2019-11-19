@@ -46,16 +46,10 @@ public class ImageMetadataResource {
     }
 
     @POST
-    public Response createImageMetadata(ImageMetadata imageMetadata) {
-
-        if ((imageMetadata.getTitle() == null || imageMetadata.getDescription() == null || imageMetadata.getUri() == null)) {
-            return Response.status(Response.Status.BAD_REQUEST).build();
-        } else {
-            imageMetadata = imageMetadataBean.createImageMetadata(imageMetadata);
-        }
-
-        return Response.status(Response.Status.CONFLICT).entity(imageMetadata).build();
-
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void createImageMetadata(ImageMetadata imageMetadata) {
+        imageMetadata = imageMetadataBean.createImageMetadata(imageMetadata);
+        //return Response.status(Response.Status.CONFLICT).entity(imageMetadata).build();
     }
 
     @PUT
