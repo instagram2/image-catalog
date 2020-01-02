@@ -2,6 +2,7 @@ package instagram2.imagecatalog.services.beans;
 
 import com.kumuluz.ee.rest.beans.QueryParameters;
 import com.kumuluz.ee.rest.utils.JPAUtils;
+import com.kumuluz.ee.discovery.annotations.DiscoverService;
 import instagram2.imagecatalog.lib.ImageMetadata;
 import instagram2.imagecatalog.models.entities.ImageMetadataEntity;
 import org.json.simple.parser.JSONParser;
@@ -46,14 +47,15 @@ public class ImageMetadataBean {
 
     private ImageMetadata testImg;
 
-    private String baseUrl;
+    @Inject
+    @DiscoverService("comments")
+    private Optional<String> baseUrl;
 
     private List<ImageMetadata> mockDB = new ArrayList<>();
 
     @PostConstruct
     private void init() {
         httpClient = ClientBuilder.newClient();
-        baseUrl = "http://localhost:8081"; // only for demonstration
     }
 
 

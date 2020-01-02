@@ -13,7 +13,7 @@ spec:
         app: image-catalog
     spec:
       containers:
-      - image: instagram2/image-catalog:latest
+      - image: instagram2/image-catalog:1.0.0-SNAPSHOT-3.1
         name: image-catalog
         env:
           - name: KUMULUZEE_DISCOVERY_CLUSTER
