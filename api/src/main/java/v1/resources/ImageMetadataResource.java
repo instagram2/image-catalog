@@ -34,9 +34,9 @@ public class ImageMetadataResource {
 
     @GET
     @Path("/{imageMetadataId}")
-    public Response getImageMetadata(@PathParam("imageMetadataId") Integer imageMetadataId) {
+    public Response getImageMetadataById(@PathParam("imageMetadataId") Integer imageMetadataId) {
 
-        ImageMetadata imageMetadata = imageMetadataBean.getImageMetadata(imageMetadataId);
+        ImageMetadata imageMetadata = imageMetadataBean.getImageMetadataById(imageMetadataId);
 
         if (imageMetadata == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
@@ -53,7 +53,7 @@ public class ImageMetadataResource {
     }
 
     @PUT
-    @Path("{imageMetadataId}")
+    @Path("/{imageMetadataId}")
     public Response putImageMetadata(@PathParam("imageMetadataId") Integer imageMetadataId,
                                      ImageMetadata imageMetadata) {
 
@@ -63,12 +63,12 @@ public class ImageMetadataResource {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
 
-        return Response.status(Response.Status.NOT_MODIFIED).build();
+        return Response.status(Response.Status.OK).build();
 
     }
 
     @DELETE
-    @Path("{imageMetadataId}")
+    @Path("/{imageMetadataId}")
     public Response deleteImageMetadata(@PathParam("imageMetadataId") Integer imageMetadataId) {
 
         boolean deleted = imageMetadataBean.deleteImageMetadata(imageMetadataId);

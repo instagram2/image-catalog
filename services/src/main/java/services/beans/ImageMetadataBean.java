@@ -64,7 +64,7 @@ public class ImageMetadataBean {
         return this.mockDB;
     }
 
-    public ImageMetadata getImageMetadata(Integer id) {
+    public ImageMetadata getImageMetadataById(Integer id) {
         ImageMetadata imageMetadata = null;
 
         for (ImageMetadata image : this.mockDB) {

@@ -24,6 +24,7 @@
 
         <kumuluzee.version>3.5.0</kumuluzee.version>
         <kumuluzee-rest.version>1.2.3</kumuluzee-rest.version>
+        <kumuluzee-discovery.version>1.1.1</kumuluzee-discovery.version>
     </properties>
 
     <repositories>
@@ -48,6 +49,12 @@
                 <version>${kumuluzee.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.kumuluz.ee.discovery</groupId>
+                <artifactId>kumuluzee-discovery-etcd</artifactId>
+                <version>${kumuluzee-discovery.version}</version>
             </dependency>
 
             <dependency>

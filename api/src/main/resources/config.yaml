@@ -1,0 +1,12 @@
+kumuluzee:
+  name: image-catalog-service
+  env:
+    name: dev
+  version: 1.0.0
+  server:
+    base-url: http://localhost:8080
+    http:
+      port: 8080
+  discovery:
+    etcd:
+      hosts: http://192.168.29.109:2379

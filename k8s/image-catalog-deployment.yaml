@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: image-catalog-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: image-catalog
+  template:
+    metadata:
+      labels:
+        app: image-catalog
+    spec:
+      containers:
+      - image: instagram2/image-catalog:1.0.0-SNAPSHOT-3.1
+        name: image-catalog
+        env:
+          - name: KUMULUZEE_DISCOVERY_CLUSTER
+            value: gcloud
+          - name: KUMULUZEE_DISCOVERY_ETCD_HOSTS
+            value: http://etcd:2379
+          - name: KUMULUZEE_SERVER_BASEURL
+            value: http://35.240.79.227:8080
+        ports:
+        - containerPort: 8080
+          name: server
+          protocol: TCP
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: image-catalog
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 8080
+    protocol: TCP
+    targetPort: server
+  selector:
+    app: image-catalog
