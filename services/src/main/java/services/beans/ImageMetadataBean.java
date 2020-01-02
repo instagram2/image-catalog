@@ -49,7 +49,7 @@ public class ImageMetadataBean {
 
     @Inject
     @DiscoverService("comments")
-    private <String> baseUrl;
+    private String baseUrl;
 
     private List<ImageMetadata> mockDB = new ArrayList<>();
 
