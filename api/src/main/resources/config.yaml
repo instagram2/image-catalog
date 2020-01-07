@@ -16,3 +16,8 @@ kumuluzee:
   discovery:
     etcd:
       hosts: http://192.168.29.109:2379
+  health:
+    checks:
+      data-source-health-check:
+        type: liveness
+        jndi-name: jdbc/ImageMetadataDS
