@@ -1,4 +1,4 @@
-package instagram2.imagecatalog.api.v1;
+package v1;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;

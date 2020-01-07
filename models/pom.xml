@@ -21,6 +21,12 @@
             <groupId>instagram2</groupId>
             <artifactId>image-catalog-lib</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+        </dependency>
+
+
     </dependencies>
 
 </project>

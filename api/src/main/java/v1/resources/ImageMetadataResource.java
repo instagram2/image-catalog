@@ -1,4 +1,4 @@
-package instagram2.imagecatalog.api.v1.resources;
+package v1.resources;
 
 import instagram2.imagecatalog.lib.ImageMetadata;
 import instagram2.imagecatalog.services.beans.ImageMetadataBean;
@@ -27,7 +27,8 @@ public class ImageMetadataResource {
     @GET
     public Response getImageMetadata() {
 
-        List<ImageMetadata> imageMetadata = imageMetadataBean.getImageMetadata();
+        //List<ImageMetadata> imageMetadata = imageMetadataBean.getImageMetadata();
+        List<ImageMetadata> imageMetadata = imageMetadataBean.getImageMetadataFilter(uriInfo);
 
         return Response.status(Response.Status.OK).entity(imageMetadata).build();
     }
@@ -46,14 +47,21 @@ public class ImageMetadataResource {
     }
 
     @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    public void createImageMetadata(ImageMetadata imageMetadata) {
-        imageMetadata = imageMetadataBean.createImageMetadata(imageMetadata);
+   // @Consumes(MediaType.APPLICATION_JSON)
+    public Response createImageMetadata(ImageMetadata imageMetadata) {
+        //imageMetadata = imageMetadataBean.createImageMetadata(imageMetadata);
         //return Response.status(Response.Status.CONFLICT).entity(imageMetadata).build();
+        if ((imageMetadata.getTitle() == null || imageMetadata.getDescription() == null || imageMetadata.getUri() == null)) {
+            return Response.status(Response.Status.BAD_REQUEST).build();
+        } else {
+            imageMetadata = imageMetadataBean.createImageMetadata(imageMetadata);
+        }
+
+        return Response.status(Response.Status.CREATED).entity(imageMetadata).build();
     }
 
     @PUT
-    @Path("/{imageMetadataId}")
+    @Path("{imageMetadataId}")
     public Response putImageMetadata(@PathParam("imageMetadataId") Integer imageMetadataId,
                                      ImageMetadata imageMetadata) {
 
@@ -61,6 +69,8 @@ public class ImageMetadataResource {
 
         if (imageMetadata == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
+        } else if ((imageMetadata.getTitle() == null || imageMetadata.getDescription() == null || imageMetadata.getUri() == null)) {
+            return Response.status(Response.Status.BAD_REQUEST).build();
         }
 
         return Response.status(Response.Status.OK).build();
