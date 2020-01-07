@@ -24,6 +24,7 @@
 
         <kumuluzee.version>3.5.0</kumuluzee.version>
         <kumuluzee-rest.version>1.2.3</kumuluzee-rest.version>
+        <kumuluzee-config.version>1.2.0</kumuluzee-config.version>
         <kumuluzee-discovery.version>1.1.1</kumuluzee-discovery.version>
         <kumuluzee-health.version>2.1.0</kumuluzee-health.version>
     </properties>
@@ -51,10 +52,14 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-
             <dependency>
-                <groupId>com.kumuluz.ee.discovery</groupId>
+                <artifactId>kumuluzee-config-etcd</artifactId>
+                <groupId>com.kumuluz.ee.config</groupId>
+                <version>${kumuluzee-config.version}</version>
+            </dependency>
+            <dependency>
                 <artifactId>kumuluzee-discovery-etcd</artifactId>
+                <groupId>com.kumuluz.ee.discovery</groupId>
                 <version>${kumuluzee-discovery.version}</version>
             </dependency>
             <dependency>

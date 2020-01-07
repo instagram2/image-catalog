@@ -30,6 +30,11 @@
             <groupId>com.kumuluz.ee.health</groupId>
             <artifactId>kumuluzee-health</artifactId>
         </dependency>
+
+        <dependency>
+            <artifactId>kumuluzee-config-etcd</artifactId>
+            <groupId>com.kumuluz.ee.config</groupId>
+        </dependency>
     </dependencies>
 
 

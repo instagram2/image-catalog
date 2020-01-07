@@ -13,6 +13,9 @@ kumuluzee:
       username: dbuser
       password: postgres
       max-pool-size: 20
+  config:
+    etcd:
+      hosts: http://192.168.29.109:2379
   discovery:
     etcd:
       hosts: http://192.168.29.109:2379
@@ -21,3 +24,10 @@ kumuluzee:
       data-source-health-check:
         type: liveness
         jndi-name: jdbc/ImageMetadataDS
+      http-health-check:
+          type: liveness
+          connection-url: https://google.com
+configuration-properties:
+  comments-service:
+    enabled: true
+

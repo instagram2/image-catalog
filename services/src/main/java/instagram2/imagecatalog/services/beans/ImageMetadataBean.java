@@ -6,6 +6,7 @@ import com.kumuluz.ee.discovery.annotations.DiscoverService;
 import instagram2.imagecatalog.lib.ImageMetadata;
 import instagram2.imagecatalog.models.converters.ImageMetadataConverter;
 import instagram2.imagecatalog.models.entities.ImageMetadataEntity;
+import instagram2.imagecatalog.services.config.IntegrationProperties;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
@@ -61,6 +62,9 @@ public class ImageMetadataBean {
     @DiscoverService("comments")
     private Optional<String> baseUrl;
 
+    @Inject
+    private IntegrationProperties integrationProperties;
+
     private List<ImageMetadata> mockDB = new ArrayList<>();
 
     @PostConstruct
@@ -114,7 +118,9 @@ public class ImageMetadataBean {
         }
 
         ImageMetadata imageMetadata = ImageMetadataConverter.toDto(imageMetadataEntity);
-        //imageMetadata.setNumberOfComments(getCommentCount(id));
+        if (integrationProperties.isIntegrateWithCommentsService()) {
+            imageMetadata.setNumberOfComments(getCommentCount(id));
+        }
 
         return imageMetadata;
     }
