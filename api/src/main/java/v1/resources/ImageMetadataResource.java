@@ -1,7 +1,10 @@
 package v1.resources;
 
+import com.kumuluz.ee.logs.cdi.Log;
 import instagram2.imagecatalog.lib.ImageMetadata;
 import instagram2.imagecatalog.services.beans.ImageMetadataBean;
+import instagram2.imagecatalog.services.config.IntegrationProperties;
+import org.eclipse.microprofile.metrics.annotation.Timed;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -16,15 +19,20 @@ import java.util.List;
 @Path("/images")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
+@Log
 public class ImageMetadataResource {
 
     @Inject
     private ImageMetadataBean imageMetadataBean;
 
+    @Inject
+    private IntegrationProperties ing;
+
     @Context
     protected UriInfo uriInfo;
 
     @GET
+    @Timed
     public Response getImageMetadata() {
 
         //List<ImageMetadata> imageMetadata = imageMetadataBean.getImageMetadata();
